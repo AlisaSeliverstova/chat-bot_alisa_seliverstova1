@@ -125,22 +125,22 @@ def back_to_main(message):
 # Обработчики основных функций
 @bot.message_handler(func=lambda message: message.text == "Сравнить программы" and user_states.get(message.chat.id, {}).get("state") == "main")
 def compare_programs(message):
-    response = "🔍 Сравнение программ:\n\n"
+    response = " Сравнение программ:\n\n"
     
     # Основная информация
-    response += "📌 Основная информация:\n"
+    response += " Основная информация:\n"
     for key in ["institute", "form", "duration", "language", "price", "dormitory", "military_center", "accreditation"]:
         ai_val = programs_data["ai"][key]
         ai_product_val = programs_data["ai_product"][key]
         response += f"- {key.replace('_', ' ').title()}: {ai_val} / {ai_product_val}\n"
     
     # Особенности
-    response += "\n📌 Особенности:\n"
+    response += "\n Особенности:\n"
     response += f"- Искусственный интеллект: {programs_data['ai']['features']}\n"
     response += f"- Управление ИИ-продуктами: {programs_data['ai_product']['features']}\n"
     
     # Направления подготовки
-    response += "\n📌 Направления подготовки:\n"
+    response += "\n Направления подготовки:\n"
     for code, spec in programs_data["ai"]["specialties"].items():
         response += f"- {code} {spec['name']}:\n"
         response += f"  Бюджет: {spec['budget']} / "
@@ -202,20 +202,20 @@ def provide_recommendation(message):
     # Простые правила для рекомендаций
     if any(word in background for word in ["машинн", "ml", "нейрон", "deep learning", "ии", "ai"]):
         recommendation = (
-            "🎯 Исходя из твоего опыта в машинном обучении, тебе может быть больше подходит программа "
+            " Исходя из твоего опыта в машинном обучении, тебе может быть больше подходит программа "
             "'Искусственный интеллект', так как она больше фокусируется на технических аспектах ИИ.\n\n"
             "Однако, если ты хочешь научиться управлять ИИ-продуктами и выводить их на рынок, "
             "рассмотри программу 'Управление ИИ-продуктами'."
         )
     elif any(word in background for word in ["управлен", "менеджмент", "product", "бизнес", "маркетинг"]):
         recommendation = (
-            "🎯 Учитывая твой опыт в управлении или бизнесе, программа 'Управление ИИ-продуктами' "
+            " Учитывая твой опыт в управлении или бизнесе, программа 'Управление ИИ-продуктами' "
             "может быть для тебя более подходящей, так как она сочетает технические знания с управленческими.\n\n"
             "Если же ты хочешь углубиться в технические аспекты ИИ, рассмотри программу 'Искусственный интеллект'."
         )
     else:
         recommendation = (
-            "🤔 На основании твоего описания сложно сделать точную рекомендацию. Вот что можно учесть:\n\n"
+            " На основании твоего описания сложно сделать точную рекомендацию. Вот что можно учесть:\n\n"
             "1. 'Искусственный интеллект' - больше технических дисциплин, алгоритмы, машинное обучение\n"
             "2. 'Управление ИИ-продуктами' - больше про управление проектами, вывод продуктов на рынок\n\n"
             "Подумай, что тебе больше интересно - разработка ИИ или его применение в бизнесе."
@@ -233,10 +233,10 @@ def show_contacts(message):
     
     for program in ["ai", "ai_product"]:
         manager = programs_data[program]["manager"]
-        response += f"📌 {programs_data[program]['name']}:\n"
-        response += f"👤 {manager['name']}\n"
-        response += f"📧 {manager['email']}\n"
-        response += f"📱 {manager['phone']}\n\n"
+        response += f" {programs_data[program]['name']}:\n"
+        response += f" {manager['name']}\n"
+        response += f" {manager['email']}\n"
+        response += f" {manager['phone']}\n\n"
     
     bot.send_message(message.chat.id, response)
 
@@ -245,7 +245,7 @@ def show_exam_dates(message):
     response = "📅 Даты вступительных экзаменов:\n\n"
     
     for program in ["ai", "ai_product"]:
-        response += f"📌 {programs_data[program]['name']}:\n"
+        response += f" {programs_data[program]['name']}:\n"
         for date in programs_data[program]["exam_dates"]:
             response += f"- {date}\n"
         response += "\n"
